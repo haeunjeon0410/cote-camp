@@ -82,13 +82,13 @@ function wander() {
   const ids = Object.keys(S.dex).filter(k => S.dex[k].caught > 0 && SP[k]);
   if (!ids.length) return;
   const first = S.last && ids.includes(S.last) ? [S.last] : [];
-  const list = first.concat(ids.filter(k => !first.includes(k)).sort(() => Math.random() - .5)).slice(0, 7);
+  const list = first.concat(ids.filter(k => !first.includes(k)).sort(() => Math.random() - .5)).slice(0, 8);
   const box = document.createElement('div'); box.className = 'wd-layer'; sc.appendChild(box);
   const place = p => { p.s.style.left = (p.x + 7) + 'px'; p.s.style.top = (p.y + 24) + 'px'; p.s.style.zIndex = Math.round(p.y) - 1; p.e.style.left = p.x + 'px'; p.e.style.top = (p.y - (p.step ? 1 : 0)) + 'px'; p.e.style.transform = p.dir > 0 ? 'scaleX(-1)' : ''; p.e.style.zIndex = Math.round(p.y); };
   const pets = list.map(k => {
     const e = document.createElement('img'); e.className = 'wd'; e.src = spr.icon(SP[k].dex); e.alt = ''; box.appendChild(e);
     const s = document.createElement('img'); s.className = 'wds'; s.src = Art.shadow(26, 6); s.alt = ''; box.insertBefore(s, e);
-    const p = { s, e, k, x: 8 + Math.random() * 200, y: 100 + Math.random() * 14, dir: Math.random() < .5 ? -1 : 1, wait: 0, step: false };
+    const p = { s, e, k, x: 8 + Math.random() * 200, y: 86 + Math.random() * 20, dir: Math.random() < .5 ? -1 : 1, wait: 0, step: false };
     e.onclick = () => { p.wait = 4; e.classList.remove('hop'); void e.offsetWidth; e.classList.add('hop'); showNote(`${SP[k].name} · Lv.${levelOf(S.dex[k])}`); };
     place(p); return p;
   });
@@ -99,7 +99,7 @@ function wander() {
       if (Math.random() < .14) { p.wait = 2 + Math.floor(Math.random() * 6); continue; }
       if (Math.random() < .08) p.dir *= -1;
       p.x += p.dir * 4; if (p.x < 6) { p.x = 6; p.dir = 1; } if (p.x > 210) { p.x = 210; p.dir = -1; }
-      if (Math.random() < .06) p.y = Math.max(98, Math.min(116, p.y + (Math.random() < .5 ? -4 : 4)));
+      if (Math.random() < .06) p.y = Math.max(84, Math.min(108, p.y + (Math.random() < .5 ? -4 : 4)));
       p.step = !p.step; place(p);
     }
   }, 450);
