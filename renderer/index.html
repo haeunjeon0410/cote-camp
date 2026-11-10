@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>오박사의 코테 캠프</title>
+<link rel="stylesheet" href="ds.css">
+</head>
+<body>
+<div id="console">
+    <div class="sh"><b data-k="L">L</b><b data-k="R">R</b></div>
+    <div class="half top">
+      <i class="spk l"></i>
+      <div class="screen" id="top"></div>
+      <i class="spk r"></i>
+    </div>
+    <div class="hinge"><i></i></div>
+    <div class="half bot">
+      <div class="side">
+        <div class="dpad"><b class="u" data-k="up"></b><b class="l" data-k="left"></b><b class="r" data-k="right"></b><b class="d" data-k="down"></b><s></s></div>
+        <span class="lbl" data-k="Sel">SELECT<em>Backspace</em></span>
+      </div>
+      <div class="screen" id="bot"></div>
+      <div class="side">
+        <div class="abxy"><b class="bx" data-k="X">X</b><b class="by" data-k="Y">Y</b><b class="ba" data-k="A">A</b><b class="bb" data-k="B">B</b></div>
+        <span class="lbl" data-k="S">START<em>Enter</em></span>
+      </div>
+    </div>
+</div>
+
+<div id="pc" hidden>
+  <div class="pcc">
+    <div class="sh"><b data-k="L">L</b><b data-k="R">R</b></div>
+    <div class="half top">
+      <i class="spk l"></i>
+      <div class="screen ps"><div class="wh" id="pc-hd"></div><div class="pv" id="pc-left"></div><div class="pv" id="pc-res" hidden></div><div class="pv" id="pc-note" hidden></div></div>
+      <i class="spk r"></i>
+    </div>
+    <div class="hinge"><i></i></div>
+    <div class="half bot">
+      <div class="side">
+        <div class="dpad"><b class="u" data-k="up"></b><b class="l" data-k="left"></b><b class="r" data-k="right"></b><b class="d" data-k="down"></b><s></s></div>
+        <span class="lbl" data-k="Sel">SELECT<em>Backspace</em></span>
+      </div>
+      <div class="screen ps"><div id="editor"></div><div class="pbar"><span class="pb" data-a="pchint" id="pc-hint"><i class="g" style="background-image:var(--spr-gX)"></i><b>힌트</b></span><span class="pb" data-a="pcrun"><i class="g" style="background-image:var(--spr-gY)"></i><b>실행</b></span><span class="pb go" data-a="pcsubmit"><i class="g" style="background-image:var(--spr-gA)"></i><b>제출</b></span><span class="pb" data-a="pcexit"><i class="g" style="background-image:var(--spr-gB)"></i><b>나가기</b></span></div></div>
+      <div class="side">
+        <div class="abxy"><b class="bx" data-k="X">X</b><b class="by" data-k="Y">Y</b><b class="ba" data-k="A">A</b><b class="bb" data-k="B">B</b></div>
+        <span class="lbl" data-k="S">START<em>Enter</em></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="grip" title="끌어서 크기 조절"></div>
+<div id="winctl"><b data-w="min" title="작게"></b><b data-w="full" title="전체 화면 (F11)"></b><b data-w="close" title="닫기"></b></div>
+
+<script src="../node_modules/monaco-editor/min/vs/loader.js"></script>
+<script>
+  const MONACO_BASE = new URL('../node_modules/monaco-editor/min/', location.href).href;
+  require.config({ paths: { vs: MONACO_BASE + 'vs' } });
+  self.MonacoEnvironment = {
+    getWorkerUrl: () => 'data:text/javascript;charset=utf-8,' + encodeURIComponent(
+      `self.MonacoEnvironment={baseUrl:'${MONACO_BASE}'};importScripts('${MONACO_BASE}vs/base/worker/workerMain.js');`),
+  };
+</script>
+<script src="data.js"></script>
+<script src="species.js"></script>
+<script src="art.js"></script>
+<script src="fieldart.js"></script>
+<script src="fx.js"></script>
+<script src="coach.js"></script>
+<script src="game.js"></script>
+<script src="field.js"></script>
+</body>
+</html>

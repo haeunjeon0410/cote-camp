@@ -1,0 +1,99 @@
+=== split | 한 줄에 여러 값 받기
+한 줄에 수가 여럿 오면 `map(int, input().split())`으로 한꺼번에 받아요. 값이 정해진 개수면 앞에서 풀어서 받고, 개수가 정해지지 않았으면 리스트로 받아요.
+--- code
+a, b = map(int, input().split())        # 2개
+nums = list(map(int, input().split()))  # 몇 개든 리스트로
+
+=== float | 소수와 나눗셈
+파이썬 3의 `/`는 정수끼리 나눠도 소수가 나와요. 몫만 필요하면 `//`, 나머지는 `%`예요. 자릿수를 맞춰 출력할 땐 f-string을 써요.
+--- code
+7 / 2     # 3.5
+7 // 2    # 3
+7 % 2     # 1
+print(f"{7 / 3:.9f}")   # 소수 아래 9자리
+
+=== divmod | 몫과 나머지, 시간 계산
+시간이나 날짜 문제는 전부 "분 단위(또는 일 단위) 정수"로 바꿔서 계산하고 마지막에 되돌려요. 파이썬의 `%`는 음수에도 0 이상을 돌려줘서 하루가 넘어가거나 모자라는 경우가 한 줄로 해결돼요.
+--- code
+t = (h * 60 + m - 45) % 1440   # 자정 전이어도 OK
+hour, minute = divmod(t, 60)
+
+=== fmt | 출력 모양 맞추기
+출력은 한 글자라도 다르면 오답이에요. f-string으로 형식을 맞추고, 여러 값을 한 줄에 이을 땐 `print(*목록)`을 써요. 줄 끝을 바꾸려면 `end=`, 구분자는 `sep=`예요.
+--- code
+print(f"{n} * {i} = {n * i}")
+print(*[1, 2, 3])          # 1 2 3
+print("\n".join(map(str, [1, 2, 3])))   # 한 줄에 하나씩
+
+=== fastin | 입력이 많을 때
+입력이 수만 줄 이상이면 `input()`이 느려서 시간 초과가 날 수 있어요. 맨 위에 두 줄을 넣으면 빨라져요. 이때 `input()`은 줄 끝의 개행을 포함하니 문자열은 `.strip()`으로 정리해요. 출력도 줄마다 `print`하지 말고 모아서 한 번에 내보내요.
+--- code
+import sys
+input = sys.stdin.readline
+
+s = input().strip()
+print("\n".join(map(str, result)))
+
+=== sortkey | 정렬 (sorted와 key)
+`sorted(목록)`은 새 리스트를, `목록.sort()`는 제자리에서 정렬해요. `key`에 기준을 주고, 기준이 여럿이면 튜플로 묶어요. 내림차순은 `reverse=True`. 파이썬의 정렬은 **안정 정렬**이라 같은 값끼리는 원래 순서가 유지돼요.
+--- code
+sorted(words, key=lambda w: (len(w), w))   # 길이 먼저, 같으면 사전 순
+people.sort(key=lambda p: int(p[0]))       # 나이순, 같으면 입력 순서 그대로
+sorted(nums, reverse=True)
+
+=== setdict | 빨리 찾기 (set, dict)
+"있는지 많이 확인해야 한다"는 신호가 보이면 `set`이나 `dict`를 써요. `in` 연산이 평균 `O(1)`이에요. 리스트에서 `in`은 `O(N)`이라 반복하면 느려요. `set`은 중복도 없애 줘요.
+--- code
+s = set(input().split())
+if x in s: ...
+cnt = {}
+cnt[k] = cnt.get(k, 0) + 1   # 세기
+
+=== dq | 스택과 큐 (list, deque)
+리스트가 곧 스택이에요: `append`로 넣고 `pop()`으로 꺼내요. 큐는 `collections.deque`로 `popleft()`를 써요. 리스트의 `pop(0)`은 느려요. 비었는지는 `if st:`(비어 있지 않으면 참)로 확인하고, 빈 곳에서 `pop()`하면 에러가 나요.
+--- code
+from collections import deque
+st = []; st.append(3); st.pop()
+q = deque(); q.append(3); q.popleft()
+if q: ...
+
+=== bigint | 정수는 넘치지 않아요
+파이썬의 정수는 아무리 커도 넘치지 않아요 (C++이나 Java에서는 `long`이 필요한 합도 그냥 써도 돼요). 대신 아주 큰 수 계산은 느려질 수 있어요.
+--- code
+print(10 ** 30 + 1)
+
+=== slice | 슬라이싱과 뒤집기
+`s[a:b]`는 a번부터 b 앞까지, `s[::-1]`은 뒤집기예요. 문자열과 리스트 모두 같아요. 문자열은 바꿀 수 없으니(`s[0] = "a"`는 에러) 리스트로 바꿔서 고치거나 새로 만들어요.
+--- code
+s[:4]        # 앞 4글자
+s[::-1]      # 뒤집기
+s == s[::-1] # 팰린드롬인지
+"".join(parts)
+
+=== re | 정규식 (re)
+문자 규칙이 복잡할 때 `re.sub`, `re.findall`이 코드를 확 줄여 줘요. 코테에서 문자열 정리 문제에 자주 쓰여요.
+--- code
+import re
+re.sub(r"[^a-z0-9_]", "_", s)       # 허용 안 되는 글자를 _로
+re.sub(r"_+", "_", s)               # 연속된 _를 하나로
+re.findall(r"\d+", "a12b345")       # ['12', '345']
+
+=== grid | 2차원 리스트 만들기
+`[[0] * m] * n`은 같은 줄을 n번 가리키는 함정이에요. 한 칸을 바꾸면 모든 줄이 바뀌어요. 반드시 `[[0] * m for _ in range(n)]`로 만들어요.
+--- code
+a = [[0] * m for _ in range(n)]
+g = [input().strip() for _ in range(n)]   # 글자 격자는 문자열 리스트로
+
+=== dirs | 방향 벡터
+위, 오른쪽, 아래, 왼쪽을 0, 1, 2, 3으로 두고 행·열 변화를 리스트에 적어 둬요. 오른쪽으로 돌기는 `(k + 1) % 4`, 왼쪽은 `(k - 1) % 4`예요. 칸을 보기 전에 **범위를 먼저** 검사해요.
+--- code
+dr = [-1, 0, 1, 0]
+dc = [0, 1, 0, -1]
+nr, nc = r + dr[k], c + dc[k]
+if 0 <= nr < n and 0 <= nc < m: ...
+
+=== zip | 표 돌리기와 뒤집기
+`zip(*표)`는 행과 열을 바꿔요(전치). 줄 순서를 뒤집고 전치하면 시계 방향 90도예요. 같은 동작을 4번 하면 제자리인 경우는 `k % 4`번만 해요.
+--- code
+rot = [list(row) for row in zip(*a[::-1])]   # 시계 방향 90도
+for _ in range(k % 4): ...

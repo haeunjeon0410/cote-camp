@@ -1,0 +1,18 @@
+{
+  "name": "cote-camp",
+  "productName": "오박사의 코테 캠프",
+  "version": "0.1.0",
+  "description": "나만의 코딩 테스트 연습 앱 (C++/Python 채점 + 포켓몬 수집)",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "verify": "node tools/verify.js",
+    "verify-algos": "node tools/verify-algos.js",
+    "sprites": "node tools/get-sprites.js"
+  },
+  "dependencies": {
+    "electron": "^45.2.2",
+    "galmuri": "^2.40.3",
+    "monaco-editor": "^0.57.0"
+  }
+}

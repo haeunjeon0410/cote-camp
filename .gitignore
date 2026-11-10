@@ -1,0 +1,10 @@
+.env
+node_modules/
+shots/
+assets/
+HANDOVER.md
+docs/plan.html
+docs/plan.pdf
+tools/make-pdf.js
+*.bak
+*.tmp
