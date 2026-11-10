@@ -6,10 +6,10 @@
 <p>
   <img src="docs/img/hub.png" width="32%" alt="">
   <img src="docs/img/problem.png" width="32%" alt="">
-  <img src="docs/img/wrong.png" width="32%" alt="">
+  <img src="docs/img/catch.png" width="32%" alt="">
 </p>
 <p>
-  <img src="docs/img/catch.png" width="32%" alt="">
+  <img src="docs/img/map.png" width="32%" alt="">
   <img src="docs/img/dex.png" width="32%" alt="">
   <img src="docs/img/badges.png" width="32%" alt="">
 </p>
